@@ -9,10 +9,12 @@ const userController = {
       const { name, email, password } = req.body
       
       const user = await User.findOne({email})
-      if (user) return res.status(400).json({
-        success: false,
-        msg: 'This email already exists.'
-      })
+      if (user) {
+        return res.status(400).json({
+          success: false,
+          msg: 'This email already exists.'
+        })
+      }
 
       if (password.length < 6) {
         return res.status(400).json({
@@ -115,15 +117,15 @@ const userController = {
   },
   refreshToken: (req, res) => {
     try {
-      const rf_token = req.cookies.refreshtoken
-      if (!rf_token) {
+      const rfToken = req.cookies.refreshtoken
+      if (!rfToken) {
         return res.status(400).json({
           success: false,
           msg: 'Please Login or Register'
         })
       }
 
-      jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+      jwt.verify(rfToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         if (err) {
           return res.status(400).json({
             success: false,
@@ -143,7 +145,7 @@ const userController = {
       return res.status(500).json({ msg: error.message })
     }
   },
-  getUser: async (req,res) => {
+  getUser: async (req, res) => {
     try {
       const user = await User.findById(req.user.id).select('-password')
       if (!user) {

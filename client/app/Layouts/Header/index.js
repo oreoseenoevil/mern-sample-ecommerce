@@ -2,7 +2,7 @@ import React, { Fragment, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { GlobalContext } from '@Context/GlobalContext'
-import { isLogin, logout } from '@Components/Utils'
+import { isAdministrator, isLogin, logout } from '@Components/Utils'
 import Menu from '@Icons/menu.svg'
 import Close from '@Icons/close.svg'
 import Cart from '@Icons/cart.svg'
@@ -10,9 +10,6 @@ import '@Layouts/Header/index.scss'
 
 export const Header = () => {
   const { state } = useContext(GlobalContext)
-
-  const [isLogged] = state.userAPI.isLogged
-  const [isAdmin] = state.userAPI.isAdmin
   const [cart] = state.userAPI.cart
 
   const logoutUser = async () => {
@@ -46,17 +43,17 @@ export const Header = () => {
       </div>
       <div className="logo">
         <h1>
-          <Link to='/' replace>{(isLogin() && isAdmin) ? 'Admin' : 'ECShop'}</Link>
+          <Link to='/' replace>{(isLogin() && isAdministrator()) ? 'Admin' : 'ECShop'}</Link>
         </h1>
       </div>
 
       <ul>
         <li>
-          <Link to='/' replace>{isAdmin ? 'Products' : 'Shop'}</Link>
+          <Link to='/' replace>{isAdministrator() ? 'Products' : 'Shop'}</Link>
         </li>
 
-        {(isLogin() && isAdmin) && adminRouter()}
-        {isLogged ? loggedRouter() : <li><Link to='/login' replace>Login</Link> | <Link to='/register' replace>Register</Link></li>}
+        {(isLogin() && isAdministrator()) && adminRouter()}
+        {isLogin() ? loggedRouter() : <li><Link to='/login' replace>Login</Link> | <Link to='/register' replace>Register</Link></li>}
 
         <li>
           <img src={Close} alt="close" width="30" className="close" />
@@ -64,7 +61,7 @@ export const Header = () => {
       </ul>
 
       {
-        isLogin() && isAdmin ? ''
+        isLogin() && isAdministrator() ? ''
           : <div className="cart-icon">
             <span>{cart.length}</span>
             <Link to='/cart' replace>

@@ -3,8 +3,12 @@ import '@Components/Utils/index.scss'
 
 const TOKEN_KEY = 'firstLogin'
 
-export const login = () => {
-  localStorage.setItem(TOKEN_KEY, true)
+export const isAdministrator = () => {
+  return localStorage.getItem(TOKEN_KEY) ? JSON.parse(localStorage.getItem(TOKEN_KEY))[0].role === 1 : false
+}
+
+export const login = (value) => {
+  localStorage.setItem(TOKEN_KEY, JSON.stringify(value))
 }
 
 export const logout = () => {
@@ -12,11 +16,7 @@ export const logout = () => {
 }
 
 export const isLogin = () => {
-  if (localStorage.getItem(TOKEN_KEY)) {
-    return true
-  }
-
-  return false
+  return localStorage.getItem(TOKEN_KEY) ? true : false
 }
 
 export const NotFound = () => {

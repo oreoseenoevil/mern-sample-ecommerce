@@ -19,9 +19,9 @@ export const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      await axios.post('/user/login', { ...user })
+      const res = await axios.post('/user/login', { ...user })
 
-      login()
+      login(res.data.data)
 
       window.location.href = '/'
     } catch (error) {

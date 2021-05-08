@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { GlobalContext } from '@Context/GlobalContext'
 import { Products } from '@Components/Products'
 import { DetailProduct } from '@Components/DetailProduct'
 import { Login, Register } from '@Components/Auth'
@@ -12,10 +11,6 @@ import { Categories } from '@Components/Categories'
 import { PublicRoute, PrivateRoute, AdminRoute } from '@Components/Routing'
 
 export const Main = () => {
-  const { state } = useContext(GlobalContext)
-
-  // const [isLogged] = state.userAPI.isLogged
-  const [isAdmin] = state.userAPI.isAdmin
 
   return (
     <Switch>
@@ -60,12 +55,11 @@ export const Main = () => {
         exact
       />
       <AdminRoute
-        isAdmin={isAdmin}
         component={Categories}
         path='/category'
         exact
       />
-      <Route path='*' exact component={NotFound} />
+      <Route exact={true} path='*' component={NotFound} />
     </Switch>
   )
 }

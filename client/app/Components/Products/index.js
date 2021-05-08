@@ -60,22 +60,22 @@ export const Button = ({product, isAdmin}) => {
     <div className="row-btn">
       {
         isAdmin ?
-        <Fragment>
-          <Link id="btn-buy" to="#!" replace>
-            Delete
-          </Link>
-          <Link id="btn-view" to={`/edit_product/${product._id}`} replace>
-            Edit
-          </Link>
-        </Fragment> :
-        <Fragment>
-          <Link id="btn-buy" to="#!" onClick={() => addCart(product)} replace>
-            Buy
-          </Link>
-          <Link id="btn-view" to={`/detail/${product._id}`} replace>
-            View
-          </Link>
-        </Fragment>
+          <Fragment>
+            <Link id="btn-buy" to="#!" replace>
+              Delete
+            </Link>
+            <Link id="btn-view" to={`/edit_product/${product._id}`} replace>
+              Edit
+            </Link>
+          </Fragment> :
+          <Fragment>
+            <Link id="btn-buy" to="#!" onClick={() => addCart(product)} replace>
+              Buy
+            </Link>
+            <Link id="btn-view" to={`/detail/${product._id}`} replace>
+              View
+            </Link>
+          </Fragment>
       }
     </div>
   )
