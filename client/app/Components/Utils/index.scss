@@ -1,0 +1,82 @@
+// Loader Component
+svg {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40rem;
+  height: 40rem;
+  margin-left: -20rem;
+  margin-top: -20rem;
+  overflow: visible;
+}
+// path.getTotalLength() wiill give you path length
+$len: 136.71884155273438px;
+$time: 1.3s;
+
+.jumper {
+  fill: none;
+  stroke: rgb(56,56,69);
+  stroke-width: 10px;
+  stroke-dashoffset: 0;
+  stroke-dasharray: 0, $len;
+  animation: animJumper $time linear infinite;
+  
+  &.clone {
+    opacity: 0.05;
+    // transform-origin for svg bugged in ff, so i'm using translateY hack
+    transform: translateY(200px) scaleY(-1);
+  }
+}
+
+.circleL {
+  opacity: 0;
+  transform-origin: 47.2px 95.6px;
+  animation: animCircle $time infinite;
+}
+
+.circleR {
+  opacity: 0;
+  transform-origin: 136.2px 95.6px;
+  animation: animCircle $time $time*0.56 infinite;
+}
+
+@keyframes animJumper {
+  8% {
+    stroke-dasharray: $len*0.15, $len;
+  }
+  32% {
+    stroke-dasharray: $len*0.3, $len;
+    stroke-dashoffset: $len*-0.35;
+  }
+  56% {
+    stroke-dasharray: $len*0.15, $len;
+    stroke-dashoffset: $len*-0.85;
+  }
+  64% {
+    stroke-dasharray: 0, $len;
+    stroke-dashoffset: -$len;
+  }
+}
+
+@keyframes animCircle {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    transform: scale(3);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.check-out {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: #fff;
+}

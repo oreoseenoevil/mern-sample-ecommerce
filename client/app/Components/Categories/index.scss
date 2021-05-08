@@ -1,0 +1,123 @@
+.categories {
+  max-width: 700px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 30px auto;
+
+  form {
+    width: 290px;
+    margin-bottom: 20px;
+
+    .group {
+      position: relative;
+      margin-bottom: 45px;
+
+      input {
+        font-size: 1rem;
+        padding: 10px 10px 10px 5px;
+        display: block;
+        height: 3rem;
+        width: 210px;
+        border: none;
+        border-bottom: 1px solid #999;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      label {
+        color: #999;
+        font-size: 1rem;
+        font-weight: normal;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: absolute;
+        pointer-events: none;
+        left: 5px;
+        top: 20px;
+        transition: 200ms ease all;
+      }
+
+      button {
+        right: 5px;
+        bottom: 0;
+        position: absolute;
+      }
+
+      input:focus ~ label,
+      input:valid ~ label {
+        top: -10px;
+        font-size: .7rem;
+        color: rgb(3, 165, 209);
+      }
+
+      .bar {
+        position: relative;
+        display: block;
+        width: 210px;
+
+        &::before,
+        &::after {
+          content: '';
+          height: 2px;
+          width: 0;
+          bottom: 0;
+          position: absolute;
+          background: rgb(3, 165, 209);
+          transition: 200ms ease all;
+        }
+
+        &::before {
+          left: 50%;
+        }
+
+        &::after {
+          right: 50%;
+        }
+      }
+
+      input:focus ~ .bar:before,
+      input:focus ~ .bar:after {
+        width: 50%;
+      }
+    }
+  }
+
+  button {
+    font-size: .8rem;
+    letter-spacing: 1px;
+    width: 70px;
+    height: 2rem;
+    border: none;
+    text-transform: uppercase;
+    background: #000;
+    color: #fff;
+    transition:  background 300ms ease;
+
+    &:hover {
+      background: rgb(3, 165, 209);
+    }
+  }
+
+  .col {
+    .row {
+      min-width: 290px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+
+      p {
+        text-transform: capitalize;
+      }
+
+      div button {
+        margin-left: 10px;
+      }
+    }
+  }
+}

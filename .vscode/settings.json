@@ -1,0 +1,11 @@
+{
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": true,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "files.eol": "\n",
+  "prettier.jsxSingleQuote": true,
+  // "emmet.includeLanguages": {
+  //   "javascript": "javascriptreact"
+  // }
+}

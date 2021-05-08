@@ -1,0 +1,51 @@
+.detail-product {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 50px;
+  font-size: 150%;
+
+  img {
+    max-width: 400px;
+    width: 100%;
+    margin: 20px;
+    height: 450px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .box-detail {
+    max-width: 500px;
+    width: 100%;
+    margin: 5px 20px;
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    h2 {
+      text-transform: uppercase;
+      color: darkblue;
+      letter-spacing: 2px;
+      font-size: 2rem;
+    }
+
+    p {
+      line-height: 1.5;
+      margin: 10px 0;
+      opacity: 0.8;
+    }
+
+    .cart {
+      background: #333;
+      color: #fff;
+      padding: 10px 25px;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+  }
+}
