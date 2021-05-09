@@ -64,6 +64,11 @@ export const CreateProduct = () => {
     }
   }
 
+  const handleChangeInput = e => {
+    const {name, value} = e.target
+    setProduct({...product, [name]:value})
+  }
+
   const styleUpload = {
     display: images ? 'block' : 'none'
   }
@@ -94,6 +99,7 @@ export const CreateProduct = () => {
             id="product_id"
             required
             value={product.product_id}
+            onChange={handleChangeInput}
           />
           <span className="bar"></span>
           <label htmlFor="product_id">Product ID</label>
@@ -106,6 +112,7 @@ export const CreateProduct = () => {
             id="title"
             required
             value={product.title}
+            onChange={handleChangeInput}
           />
           <span className="bar"></span>
           <label htmlFor="title">Title</label>
@@ -118,6 +125,7 @@ export const CreateProduct = () => {
             id="price"
             required
             value={product.price}
+            onChange={handleChangeInput}
           />
           <span className="bar"></span>
           <label htmlFor="price">Price</label>
@@ -130,6 +138,7 @@ export const CreateProduct = () => {
             id="description"
             required
             value={product.description}
+            onChange={handleChangeInput}
             rows="5"
           />
           <label htmlFor="description">Description</label>
@@ -142,6 +151,7 @@ export const CreateProduct = () => {
             id="content"
             required
             value={product.content}
+            onChange={handleChangeInput}
             rows="7"
           />
           <label htmlFor="content">Content</label>
@@ -149,7 +159,7 @@ export const CreateProduct = () => {
 
         <div className="group select">
           <label htmlFor="categories">Categories: </label>
-          <select name="categories" value={product.category}>
+          <select name="category" value={product.category} onChange={handleChangeInput}>
             <option value="">Please select a category</option>
             {
               categories.map(category => (

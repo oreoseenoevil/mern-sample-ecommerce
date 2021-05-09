@@ -221,6 +221,7 @@
         height: 3rem;
         width: 100%;
         transition: 200ms ease all;
+        text-transform: capitalize;
 
         &:active,
         &:focus {
