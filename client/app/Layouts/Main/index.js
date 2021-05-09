@@ -1,5 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+import { PublicRoute, PrivateRoute, AdminRoute } from '@Components/Routing'
 import { Products } from '@Components/Products'
 import { DetailProduct } from '@Components/DetailProduct'
 import { Login, Register } from '@Components/Auth'
@@ -8,7 +9,7 @@ import { OrderHistory } from '@Components/History'
 import { NotFound } from '@Components/Utils'
 import { OrderDetails } from '@Components/History'
 import { Categories } from '@Components/Categories'
-import { PublicRoute, PrivateRoute, AdminRoute } from '@Components/Routing'
+import { CreateProduct } from '@Components/CreateProduct'
 
 export const Main = () => {
 
@@ -57,6 +58,11 @@ export const Main = () => {
       <AdminRoute
         component={Categories}
         path='/category'
+        exact
+      />
+      <AdminRoute
+        component={CreateProduct}
+        path='/product/create'
         exact
       />
       <Route exact={true} path='*' component={NotFound} />

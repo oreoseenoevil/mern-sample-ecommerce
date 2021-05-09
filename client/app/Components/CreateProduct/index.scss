@@ -1,0 +1,146 @@
+.create-product {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+
+  .upload {
+    max-width: 450px;
+    height: 500px;
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 20px;
+    position: relative;
+
+    #file_up {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      outline: none;
+
+      &::before {
+        content: '+';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: #fff;
+        color: rgb(250, 200, 107);
+        font-size: 17rem;
+        text-align: center;
+        cursor: pointer;
+        margin: auto;
+      }
+    }
+  }
+
+  form {
+    .group {
+      position: relative;
+      margin-bottom: 2rem;
+
+      input {
+        font-size: 1rem;
+        padding: 10px 10px 10px 5px;
+        display: block;
+        height: 3rem;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #999;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      label {
+        color: #999;
+        font-size: 1rem;
+        font-weight: normal;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: absolute;
+        pointer-events: none;
+        left: 5px;
+        top: 20px;
+        transition: 200ms ease all;
+      }
+
+      input:focus ~ label,
+      input:valid ~ label {
+        top: -10px;
+        font-size: 0.7rem;
+        color: rgb(3, 165, 209);
+      }
+
+      .bar {
+        position: relative;
+        display: block;
+        width: 100%;
+
+        &::before,
+        &::after {
+          content: '';
+          height: 2px;
+          width: 0;
+          bottom: 0;
+          position: absolute;
+          background: rgb(3, 165, 209);
+          transition: 200ms ease all;
+        }
+
+        &::before {
+          left: 50%;
+        }
+
+        &::after {
+          right: 50%;
+        }
+      }
+
+      input:focus ~ .bar:before,
+      input:focus ~ .bar:after {
+        width: 50%;
+      }
+    }
+
+    .select {
+      position: relative;
+      display: block;
+
+      label {
+        position: absolute;
+        top: -10px;
+        font-size: 0.7rem;
+        color: rgb(3, 165, 209);
+      }
+
+      select {
+        display: block;
+        padding: 10px 10px 10px 5px;
+        height: 3rem;
+        width: 100%;
+        top: 20px;
+        position: absolute;
+        transition: 200ms ease all;
+
+        &:active,
+        &:focus {
+          outline: rgb(3, 165, 209);
+          border: 1px solid rgb(3, 165, 209);
+        }
+
+        option {
+          text-transform: capitalize;
+
+          &:nth-child(1) {
+            text-transform: initial;
+          }
+        }
+      }
+    }
+  }
+}

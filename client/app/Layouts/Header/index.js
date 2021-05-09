@@ -21,7 +21,7 @@ export const Header = () => {
   const adminRouter = () => {
     return (
       <Fragment>
-        <li><Link to="/create product" replace>Create Product</Link></li>
+        <li><Link to="/product/create" replace>Create Product</Link></li>
         <li><Link to="/category" replace>Categories</Link></li>
       </Fragment>
     )
@@ -49,7 +49,7 @@ export const Header = () => {
 
       <ul>
         <li>
-          <Link to='/' replace>{isAdministrator() ? 'Products' : 'Shop'}</Link>
+          <Link to={'/'} replace>{isAdministrator() ? 'Products' : 'Shop'}</Link>
         </li>
 
         {(isLogin() && isAdministrator()) && adminRouter()}
