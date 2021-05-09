@@ -4,7 +4,7 @@ import '@Components/Utils/index.scss'
 const TOKEN_KEY = 'firstLogin'
 
 export const isAdministrator = () => {
-  return localStorage.getItem(TOKEN_KEY) ? JSON.parse(localStorage.getItem(TOKEN_KEY))[0].role === 1 : false
+  return localStorage.getItem(TOKEN_KEY) ? JSON.parse(localStorage.getItem(TOKEN_KEY)).role === 1 : false
 }
 
 export const login = (value) => {

@@ -21,6 +21,11 @@ const userController = {
           success: false,
           msg: 'Password is at least 6 characters long.'
         })
+      } else if (password.length > 25) {
+        return res.status(400).json({
+          success: false,
+          msg: 'Password is at least not more than 25 characters long.'
+        })
       }
 
       // Password Encryption
@@ -86,13 +91,11 @@ const userController = {
 
       return res.status(200).json({
         success: true,
-        data: [
-          {
-            role: user.role,
-            name: user.name,
-            email: user.email
-          }
-        ],
+        data: {
+          role: user.role,
+          name: user.name,
+          email: user.email
+        },
         access_token: accesstoken,
         refresh_token: refreshtoken
       })

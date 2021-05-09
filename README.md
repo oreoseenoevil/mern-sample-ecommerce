@@ -14,7 +14,6 @@ $ cd mern-boilerplate
 ## Setup
 
 ```
-$ touch .env
 $ copy env.example .env
 ```
 
