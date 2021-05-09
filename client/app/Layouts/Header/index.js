@@ -2,7 +2,7 @@ import React, { Fragment, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { GlobalContext } from '@Context/GlobalContext'
-import { isAdministrator, isLogin, logout } from '@Components/Utils'
+import { isAdmin, isLogin, logout } from '@Components/Utils'
 import Menu from '@Icons/menu.svg'
 import Close from '@Icons/close.svg'
 import Cart from '@Icons/cart.svg'
@@ -43,16 +43,16 @@ export const Header = () => {
       </div>
       <div className="logo">
         <h1>
-          <Link to='/' replace>{(isLogin() && isAdministrator()) ? 'Admin' : 'ECShop'}</Link>
+          <Link to='/' replace>{(isLogin() && isAdmin()) ? 'Admin' : 'ECShop'}</Link>
         </h1>
       </div>
 
       <ul>
         <li>
-          <Link to={'/'} replace>{isAdministrator() ? 'Products' : 'Shop'}</Link>
+          <Link to={'/'} replace>{isAdmin() ? 'Products' : 'Shop'}</Link>
         </li>
 
-        {(isLogin() && isAdministrator()) && adminRouter()}
+        {(isLogin() && isAdmin()) && adminRouter()}
         {isLogin() ? loggedRouter() : <li><Link to='/login' replace>Login</Link> | <Link to='/register' replace>Register</Link></li>}
 
         <li>
@@ -61,7 +61,7 @@ export const Header = () => {
       </ul>
 
       {
-        isLogin() && isAdministrator() ? ''
+        isLogin() && isAdmin() ? ''
           : <div className="cart-icon">
             <span>{cart.length}</span>
             <Link to='/cart' replace>

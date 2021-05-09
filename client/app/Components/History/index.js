@@ -3,7 +3,7 @@ import { GlobalContext } from '@Context/GlobalContext'
 import { Link, useParams } from 'react-router-dom'
 import '@Components/History/index.scss'
 import axios from 'axios'
-import { isAdministrator } from '@Components/Utils'
+import { isAdmin } from '@Components/Utils'
 
 export const OrderHistory = () => {
   const { state } = useContext(GlobalContext)
@@ -13,7 +13,7 @@ export const OrderHistory = () => {
   useEffect(() => {
     if (token) {
       const getHistory = async () => {
-        if (isAdministrator()) {
+        if (isAdmin()) {
           const res = await axios.get('/api/payment', {
             headers: {Authorization: token}
           })

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
-import { isLogin, isAdministrator } from '@Components/Utils'
+import { isLogin, isAdmin } from '@Components/Utils'
 
 export const PrivateRoute = ({component: Component, ...rest}) => {
   return (
@@ -26,7 +26,7 @@ export const PublicRoute = ({component: Component, restricted, ...rest}) => {
 export const AdminRoute = ({component: Component, ...rest}) => {
   return (
     <Route {...rest} render={props => (
-      isLogin() && isAdministrator() ? <Component {...props} />
+      isLogin() && isAdmin() ? <Component {...props} />
         : <Redirect to={{
           pathname: '/',
           state: {from: props.location}

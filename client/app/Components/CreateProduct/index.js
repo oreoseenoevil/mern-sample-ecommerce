@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import axios from 'axios'
 import { GlobalContext } from '@Context/GlobalContext'
-import {} from '@Components/Utils'
+import { isAdmin, Loader } from '@Components/Utils'
 import '@Components/CreateProduct/index.scss'
 
 const initialState = {
@@ -17,8 +17,54 @@ export const CreateProduct = () => {
   const { state } = useContext(GlobalContext)
   const [product, setProduct] = useState(initialState)
   const [categories] = state.categoriesAPI.categories
+  const [token] = state.token
   const [images, setImages] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  const handleUpload = async e => {
+    e.preventDefault()
+    try {
+      if (!isAdmin()) {
+        alert('You are not an Admin.')
+      }
+      const file = e.target.files[0]
+
+      let formData = new FormData()
+      formData.append('file', file)
+
+      setLoading(true)
+      const res = await axios.post('/api/upload', formData, {
+        headers: {
+          'content-type': 'multipart/form-data', Authorization: token
+        }
+      })
+
+      setLoading(false)
+      setImages(res.data.data)
+    } catch (error) {
+      alert(error.response.data.msg)
+    }
+  }
+
+  const handleDestroy = async () => {
+    try {
+      if (!isAdmin()) {
+        return alert('You are not an Admin.')
+      }
+      setLoading(true)
+      const res = await axios.post('/api/destroy', {
+        public_id: images.public_id
+      }, {
+        headers: { Authorization: token }
+      })
+
+      console.log(res.data)
+      setLoading(false)
+      setImages(false)
+    } catch (error) {
+      alert(error.response.data.msg)
+    }
+  }
 
   const styleUpload = {
     display: images ? 'block' : 'none'
@@ -27,11 +73,20 @@ export const CreateProduct = () => {
   return (
     <div className="create-product">
       <div className="upload">
-        <input type="file" name="file" id="file_up" />
-        <div id="file_img" style={styleUpload}>
-          <img src="" alt="" />
-          <span className="x-marked"></span>
-        </div>
+        <input
+          type="file"
+          name="file"
+          id={`${images ? 'has_img' : 'file_up' }`}
+          onChange={handleUpload}
+        />
+        {
+          loading ?
+            <div id="file_img"><Loader /></div> :
+            <div id="file_img" style={styleUpload}>
+              <img src={images ? images.url : ''} alt="" />
+              <span className="x-marked" onClick={handleDestroy}></span>
+            </div>
+        }
       </div>
       <form>
         <div className="group">

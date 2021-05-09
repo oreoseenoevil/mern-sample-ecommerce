@@ -1,7 +1,7 @@
 import React, { Fragment, useContext } from 'react'
 import { GlobalContext } from '@Context/GlobalContext'
 import { Link } from 'react-router-dom'
-import { Loader, isAdministrator } from '@Components/Utils'
+import { Loader, isAdmin } from '@Components/Utils'
 import '@Components/Products/index.scss'
 
 export const Products = () => {
@@ -18,7 +18,7 @@ export const Products = () => {
               <ProductItem
                 key={product._id}
                 product={product}
-                isAdmin={isAdministrator}
+                isAdmin={isAdmin}
               />
             )
           })

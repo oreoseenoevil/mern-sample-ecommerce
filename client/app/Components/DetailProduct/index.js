@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, Fragment } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { GlobalContext } from '@Context/GlobalContext'
 import { ProductItem } from '@Components/Products'
-import '@Components/DetailProduct/detailproduct.scss'
+import '@Components/DetailProduct/index.scss'
 
 export const DetailProduct = () => {
   const params = useParams()

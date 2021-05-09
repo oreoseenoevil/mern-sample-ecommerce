@@ -12,7 +12,7 @@ cloudinary.config({
 })
 
 // upload image only admin access
-router.post('/upload', (req, res) => {
+router.post('/upload', auth, authAdmin, (req, res) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0) {
       removeTmp(file.tempFilePath)
@@ -48,12 +48,10 @@ router.post('/upload', (req, res) => {
 
       return res.status(200).json({
         success: true,
-        data: [
-          {
-            public_id: result.public_id,
-            url: result.url
-          }
-        ]
+        data: {
+          public_id: result.public_id,
+          url: result.url
+        }
       })
     })
   } catch (error) {
@@ -62,7 +60,7 @@ router.post('/upload', (req, res) => {
 })
 
 // delete image only admin access
-router.post('/destroy', (req, res) => {
+router.post('/destroy', auth, authAdmin, (req, res) => {
   try {
     const { public_id } = req.body
     if (!public_id) {
@@ -79,7 +77,8 @@ router.post('/destroy', (req, res) => {
 
       return res.status(200).json({
         success: true,
-        msg: 'Image deleted.'
+        msg: 'Image deleted.',
+        data: result
       })
     })
   } catch (error) {
