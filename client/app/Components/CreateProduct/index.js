@@ -19,7 +19,7 @@ export const CreateProduct = () => {
   const [categories] = state.categoriesAPI.categories
   const [token] = state.token
   const [images, setImages] = useState(false)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   const handleUpload = async e => {
     e.preventDefault()
@@ -52,13 +52,11 @@ export const CreateProduct = () => {
         return alert('You are not an Admin.')
       }
       setLoading(true)
-      const res = await axios.post('/api/destroy', {
+      await axios.post('/api/destroy', {
         public_id: images.public_id
       }, {
         headers: { Authorization: token }
       })
-
-      console.log(res.data)
       setLoading(false)
       setImages(false)
     } catch (error) {

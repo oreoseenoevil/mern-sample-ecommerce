@@ -78,7 +78,7 @@ router.post('/destroy', auth, authAdmin, (req, res) => {
       return res.status(200).json({
         success: true,
         msg: 'Image deleted.',
-        data: result
+        result
       })
     })
   } catch (error) {
