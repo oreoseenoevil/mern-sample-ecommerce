@@ -19,7 +19,7 @@ export const GlobalContextProvider = ({ children }) => {
 
         setTimeout(() => {
           refreshToken()
-        }, 15000)
+        }, 10 * 60 * 1000)
       } catch (error) {
         console.log(error.response.data.msg)
       }

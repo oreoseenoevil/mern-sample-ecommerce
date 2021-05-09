@@ -107,7 +107,7 @@ export const Cart = () => {
                   <span>{product.quantity}</span>
                   <button onClick={() => increment(product._id)}> + </button>
                 </div>
-                <div className="delete" onClick={() => removeProduct(product._id)}>X</div>
+                <span className="delete x-marked" onClick={() => removeProduct(product._id)}></span>
               </div>
             </div>
           ))

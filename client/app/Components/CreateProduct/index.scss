@@ -35,19 +35,107 @@
         margin: auto;
       }
     }
+
+    // #has_img {
+    //   position: relative;
+    //   width: 100%;
+    //   height: 100%;
+    //   outline: none;
+    //   // display: none;
+    // }
+
+    #file_img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      top: 0;
+      left: 0;
+      position: absolute;
+
+      img {
+        width: 100%;
+        display: block;
+      }
+
+      span {
+        position: absolute;
+        top: -13px;
+        right: -13px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 50%;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        outline: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &::before,
+        &::after {
+          content: '';
+          display: inline-block;
+          position: absolute;
+        }
+
+        &.x-marked {
+          &::after {
+            background: crimson;
+            height: (60/100) * 2.5rem;
+            width: 4px;
+            transform: rotateZ(-45deg);
+          }
+
+          &::before {
+            background: crimson;
+            height: (60/100) * 2.5rem;
+            width: 4px;
+            transform: rotateZ(45deg);
+          }
+        }
+      }
+    }
   }
 
   form {
+    max-width: 500px;
+    min-width: 290px;
+    width: 100%;
+    margin: 15px 30px;
+    display: flex;
+    flex-direction: column;
+
     .group {
       position: relative;
       margin-bottom: 2rem;
+      width: 100%;
+
+      input,
+      textarea,
+      button {
+        width: 100%;
+        min-height: 40px;
+        padding: 0 5px;
+      }
+
+      button {
+        background: #555;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 700;
+        border-radius: 8px;
+        transition: background 300ms ease;
+
+        &:hover {
+          background: rgb(3, 165, 209);
+        }
+      }
 
       input {
-        font-size: 1rem;
-        padding: 10px 10px 10px 5px;
         display: block;
-        height: 3rem;
-        width: 100%;
         border: none;
         border-bottom: 1px solid #999;
 
@@ -70,10 +158,20 @@
       }
 
       input:focus ~ label,
-      input:valid ~ label {
-        top: -10px;
+      input:valid ~ label,
+      textarea:focus ~ label,
+      textarea:valid ~ label {
+        top: -15px;
         font-size: 0.7rem;
         color: rgb(3, 165, 209);
+      }
+
+      textarea {
+        &:active,
+        &:focus {
+          outline: rgb(3, 165, 209);
+          border: 1px solid rgb(3, 165, 209);
+        }
       }
 
       .bar {
@@ -109,11 +207,9 @@
 
     .select {
       position: relative;
-      display: block;
-
       label {
         position: absolute;
-        top: -10px;
+        top: -15px;
         font-size: 0.7rem;
         color: rgb(3, 165, 209);
       }
@@ -123,8 +219,6 @@
         padding: 10px 10px 10px 5px;
         height: 3rem;
         width: 100%;
-        top: 20px;
-        position: absolute;
         transition: 200ms ease all;
 
         &:active,

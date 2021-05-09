@@ -2,26 +2,57 @@
   position: relative;
   border: 1px solid #ccc;
   transform: scaleY(0.98);
-}
 
-.amount span {
-  color: crimson;
-  padding: 0 20px;
-}
+  .amount {
+    span {
+      color: crimson;
+      padding: 0 20px;
+    }
 
-.amount button {
-  width: 40px;
-  height: 40px;
-  border: 1px solid #777;
-}
+    button {
+      width: 40px;
+      height: 40px;
+      border: 1px solid #777;
+    }
+  }
 
-.delete {
-  position: absolute;
-  top: 0;
-  right: 5px;
-  color: crimson;
-  font-weight: 900;
-  cursor: pointer;
+  span.delete {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #fff;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    outline: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+    }
+
+    &.x-marked {
+      &::after {
+        background: crimson;
+        height: (60/100) * 3rem;
+        width: 4px;
+        transform: rotateZ(-45deg);
+      }
+
+      &::before {
+        background: crimson;
+        height: (60/100) * 3rem;
+        width: 4px;
+        transform: rotateZ(45deg);
+      }
+    }
+  }
 }
 
 .total {

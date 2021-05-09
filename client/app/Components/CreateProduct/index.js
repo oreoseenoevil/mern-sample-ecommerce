@@ -20,13 +20,17 @@ export const CreateProduct = () => {
   const [images, setImages] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  const styleUpload = {
+    display: images ? 'block' : 'none'
+  }
+
   return (
     <div className="create-product">
       <div className="upload">
         <input type="file" name="file" id="file_up" />
-        <div id="file_img">
+        <div id="file_img" style={styleUpload}>
           <img src="" alt="" />
-          <span>X</span>
+          <span className="x-marked"></span>
         </div>
       </div>
       <form>
@@ -41,6 +45,7 @@ export const CreateProduct = () => {
           <span className="bar"></span>
           <label htmlFor="product_id">Product ID</label>
         </div>
+
         <div className="group">
           <input
             type="text"
@@ -52,6 +57,7 @@ export const CreateProduct = () => {
           <span className="bar"></span>
           <label htmlFor="title">Title</label>
         </div>
+
         <div className="group">
           <input
             type="number"
@@ -63,28 +69,31 @@ export const CreateProduct = () => {
           <span className="bar"></span>
           <label htmlFor="price">Price</label>
         </div>
+
         <div className="group">
-          <input
+          <textarea
             type="text"
             name="description"
             id="description"
             required
             value={product.description}
+            rows="5"
           />
-          <span className="bar"></span>
           <label htmlFor="description">Description</label>
         </div>
+
         <div className="group">
-          <input
+          <textarea
             type="text"
             name="content"
             id="content"
             required
             value={product.content}
+            rows="7"
           />
-          <span className="bar"></span>
           <label htmlFor="content">Content</label>
         </div>
+
         <div className="group select">
           <label htmlFor="categories">Categories: </label>
           <select name="categories" value={product.category}>
@@ -98,7 +107,9 @@ export const CreateProduct = () => {
             }
           </select>
         </div>
-        <button type="submit">Create</button>
+        <div className="group">
+          <button type="submit">Create</button>
+        </div>
       </form>
     </div>
   )
