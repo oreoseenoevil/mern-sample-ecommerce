@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { isLogin } from '@Components/Utils'
 
 export function UserAPI (token) {
-  const [isLogged, setIsLogged] = useState(false)
-  const [isAdmin, setIsAdmin] = useState(false)
   const [cart, setCart] = useState([])
   const [history, setHistory] = useState([])
-  const [callback, setCallback] = useState(false)
 
   useEffect(() => {
     if (token) {
@@ -16,8 +14,6 @@ export function UserAPI (token) {
             headers: { Authorization: token }
           })
 
-          setIsLogged(true)
-          res.data.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
           setCart(res.data.data.cart)
         } catch (error) {
           alert(error.response.data.msg)
@@ -27,29 +23,8 @@ export function UserAPI (token) {
     }
   }, [token])
 
-  useEffect(() => {
-    if (token) {
-      const getHistory = async () => {
-        if (isAdmin) {
-          const res = await axios.get('/api/payment', {
-            headers: {Authorization: token}
-          })
-          setHistory(res.data.data)
-        } else {
-          const res = await axios.get('/user/history', {
-            headers: { Authorization: token }
-          })
-          setHistory(res.data.data)
-        }
-        
-      }
-
-      getHistory()
-    }
-  }, [token, callback, isAdmin])
-
   const addCart = async (product) => {
-    if (!isLogged) return alert('Please login to continue buying.')
+    if (!isLogin()) return alert('Please login to continue buying.')
 
     const check = cart.every(item => {
       return item._id !== product._id
@@ -68,11 +43,8 @@ export function UserAPI (token) {
   }
 
   return {
-    isLogged: [isLogged, setIsLogged],
-    isAdmin: [isAdmin, setIsAdmin],
     cart: [cart, setCart],
     addCart: addCart,
-    history: [history, setHistory],
-    callback: [callback, setCallback]
+    history: [history, setHistory]
   }
 }

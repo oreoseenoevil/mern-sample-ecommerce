@@ -1,14 +1,13 @@
 import React, { Fragment, useContext } from 'react'
 import { GlobalContext } from '@Context/GlobalContext'
 import { Link } from 'react-router-dom'
-import { Loader } from '@Components/Utils'
+import { Loader, isAdministrator } from '@Components/Utils'
 import '@Components/Products/index.scss'
 
 export const Products = () => {
   const { state } = useContext(GlobalContext)
   
   const [products] = state.productsAPI.products
-  const [isAdmin] = state.userAPI.isAdmin
 
   return (
     <Fragment>
@@ -19,7 +18,7 @@ export const Products = () => {
               <ProductItem
                 key={product._id}
                 product={product}
-                isAdmin={isAdmin}
+                isAdmin={isAdministrator}
               />
             )
           })
@@ -59,7 +58,7 @@ export const Button = ({product, isAdmin}) => {
   return (
     <div className="row-btn">
       {
-        isAdmin ?
+        isAdmin() ?
           <Fragment>
             <Link id="btn-buy" to="#!" replace>
               Delete

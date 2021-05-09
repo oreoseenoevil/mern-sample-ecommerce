@@ -5,7 +5,7 @@
   "editor.wordWrap": "on",
   "files.eol": "\n",
   "prettier.jsxSingleQuote": true,
-  // "emmet.includeLanguages": {
-  //   "javascript": "javascriptreact"
-  // }
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  }
 }

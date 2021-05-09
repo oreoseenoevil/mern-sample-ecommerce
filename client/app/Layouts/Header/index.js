@@ -21,7 +21,7 @@ export const Header = () => {
   const adminRouter = () => {
     return (
       <Fragment>
-        <li><Link to="/create_product" replace>Create Product</Link></li>
+        <li><Link to="/create product" replace>Create Product</Link></li>
         <li><Link to="/category" replace>Categories</Link></li>
       </Fragment>
     )

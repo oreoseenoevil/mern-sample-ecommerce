@@ -3,25 +3,28 @@ import { ProductsAPI } from '@Context/ProductsAPI'
 import { UserAPI } from '@Context/UserAPI'
 import { CategoriesAPI } from '@Context/CategoriesAPI'
 import axios from 'axios'
+import { isLogin } from '@Components/Utils'
 
 export const GlobalContext = createContext()
 
 export const GlobalContextProvider = ({ children }) => {
   const [token, setToken] = useState(false)
 
-  const refreshToken = async () => {
-    try {
-      const res = await axios.get('/user/refresh_token')
-
-      setToken(res.data.accesstoken)
-    } catch (error) {
-      console.log(error.response.data.msg)
-    }
-  }
-
   useEffect(() => {
-    const firstLogin = localStorage.getItem('firstLogin')
-    if (firstLogin) refreshToken()
+    const refreshToken = async () => {
+      try {
+        const res = await axios.get('/user/refresh_token')
+  
+        setToken(res.data.accesstoken)
+
+        setTimeout(() => {
+          refreshToken()
+        }, 15000)
+      } catch (error) {
+        console.log(error.response.data.msg)
+      }
+    }
+    if (isLogin()) refreshToken()
   }, [])
 
   const state = {

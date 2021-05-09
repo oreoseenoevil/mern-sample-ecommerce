@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment } from 'react'
+import React, { useState, useContext } from 'react'
 import { GlobalContext } from '@Context/GlobalContext'
 import '@Components/Categories/index.scss'
 import axios from 'axios'
@@ -6,7 +6,7 @@ import axios from 'axios'
 export const Categories = () => {
   const { state } = useContext(GlobalContext)
   const [token] = state.token
-  const [categories, setCategories] = state.categoriesAPI.categories
+  const [categories] = state.categoriesAPI.categories
   const [callback, setCallback] = state.categoriesAPI.callback
   const [category, setCategory] = useState('')
   const [id, setID] = useState('')
@@ -17,16 +17,16 @@ export const Categories = () => {
     try {
       if (onEdit) {
         const res = await axios.patch(`/api/category/${id}`, {
-            name: category.toLowerCase()
-          }, {
+          name: category.toLowerCase()
+        }, {
           headers: { Authorization: token }
         })
 
         alert(res.data.success && `Successfully Updated ${category} Category.`)
       } else {
         const res = await axios.post('/api/category', {
-            name: category.toLowerCase()
-          }, {
+          name: category.toLowerCase()
+        }, {
           headers: { Authorization: token }
         })
 
@@ -47,7 +47,7 @@ export const Categories = () => {
       const res = await axios.delete(`/api/category/${id}`, {
         headers: { Authorization: token }
       })  
-      alert(res.data.success && `Successfully Deleted Category.`)
+      alert(res.data.success && 'Successfully Deleted Category.')
       setCallback(!callback)
     } catch (error) {
       alert(error.response.data.msg)

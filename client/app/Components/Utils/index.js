@@ -1,7 +1,7 @@
 import React from 'react'
 import '@Components/Utils/index.scss'
 
-const TOKEN_KEY = 'firstLogin'
+const TOKEN_KEY = 'mern-shop'
 
 export const isAdministrator = () => {
   return localStorage.getItem(TOKEN_KEY) ? JSON.parse(localStorage.getItem(TOKEN_KEY)).role === 1 : false

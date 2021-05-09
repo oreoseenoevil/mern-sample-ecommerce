@@ -2,10 +2,34 @@ import React, { useState, useContext, useEffect } from 'react'
 import { GlobalContext } from '@Context/GlobalContext'
 import { Link, useParams } from 'react-router-dom'
 import '@Components/History/index.scss'
+import axios from 'axios'
+import { isAdministrator } from '@Components/Utils'
 
 export const OrderHistory = () => {
   const { state } = useContext(GlobalContext)
-  const [history] = state.userAPI.history
+  const [history, setHistory] = state.userAPI.history
+  const [token] = state.token
+
+  useEffect(() => {
+    if (token) {
+      const getHistory = async () => {
+        if (isAdministrator()) {
+          const res = await axios.get('/api/payment', {
+            headers: {Authorization: token}
+          })
+          setHistory(res.data.data)
+        } else {
+          const res = await axios.get('/user/history', {
+            headers: { Authorization: token }
+          })
+          setHistory(res.data.data)
+        }
+        
+      }
+
+      getHistory()
+    }
+  }, [token, setHistory])
 
   return (
     <div className="history">
@@ -24,7 +48,23 @@ export const OrderHistory = () => {
             history.map(item => (
               <tr key={item._id}>
                 <td>{item.paymentID}</td>
-                <td>{new Date(item.createdAt).toLocaleDateString()}</td>
+                <td>
+                  <div className="box">
+                    <span>{new Date(item.createdAt).toLocaleDateString(
+                      navigator.language, {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric'
+                      }
+                    )}</span>
+                    <span>{new Date(item.createdAt).toLocaleTimeString(
+                      navigator.language, {
+                        hour: '2-digit',
+                        minute:'2-digit'
+                      }
+                    )}</span>
+                  </div>
+                </td>
                 <td><Link to={`/history/${item._id}`}>View</Link></td>
               </tr>
             ))
@@ -70,7 +110,7 @@ export const OrderDetails = () => {
         <tbody>
           <tr>
             <td>{orderDetails.address.recipient_name}</td>
-            <td>{orderDetails.address.line1 + " - " + orderDetails.address.city}</td>
+            <td>{orderDetails.address.line1 + ' - ' + orderDetails.address.city}</td>
             <td>{orderDetails.address.postal_code}</td>
             <td>{orderDetails.address.country_code}</td>
           </tr>
@@ -86,16 +126,16 @@ export const OrderDetails = () => {
           </tr>
         </thead>
         <tbody>
-            {
-              orderDetails.cart.map(item => (
-                <tr key={item._id}>
-                  <td><img src={item.images.url} alt={item.description} /></td>
-                  <td>{item.product_id}</td>
-                  <td>{item.quantity}</td>
-                  <td>$ {item.price}</td>
-                </tr>
-              ))
-            }
+          {
+            orderDetails.cart.map(item => (
+              <tr key={item._id}>
+                <td><img src={item.images.url} alt={item.description} /></td>
+                <td>{item.product_id}</td>
+                <td>{item.quantity}</td>
+                <td>$ {item.price}</td>
+              </tr>
+            ))
+          }
         </tbody>
       </table>
     </div>

@@ -33,6 +33,13 @@
     text-align: center;
     padding: 10px;
     text-transform: capitalize;
+
+    div.box {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-wrap: wrap;
+    }
   }
 
   table a {

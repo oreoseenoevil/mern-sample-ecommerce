@@ -5,7 +5,7 @@ import { isLogin, isAdministrator } from '@Components/Utils'
 export const PrivateRoute = ({component: Component, ...rest}) => {
   return (
     <Route {...rest} render={props => (
-      isLogin() && !isAdministrator() ? <Component {...props} />
+      isLogin() ? <Component {...props} />
         : <Redirect to={{
           pathname: '/',
           state: {from: props.location}
