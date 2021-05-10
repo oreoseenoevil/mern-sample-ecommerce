@@ -3,6 +3,7 @@ import axios from 'axios'
 
 export function ProductsAPI() {
   const [products, setProducts] = useState([])
+  const [callback, setCallback] = useState(false)
 
   useEffect(() => {
     const getProducts = async () => {
@@ -10,9 +11,10 @@ export function ProductsAPI() {
       setProducts(res.data.data)
     }
     getProducts()
-  }, [setProducts])
+  }, [callback])
 
   return {
-    products: [products, setProducts]
+    products: [products, setProducts],
+    callback: [callback, setCallback]
   }
 }

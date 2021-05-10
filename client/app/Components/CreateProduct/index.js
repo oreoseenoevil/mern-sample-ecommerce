@@ -27,6 +27,7 @@ export const CreateProduct = () => {
   const param = useParams()
 
   const [products] = state.productsAPI.products
+  const [callback, setCallback] = state.productsAPI.callback
 
   const [onEdit, setOnEdit] = useState(false)
 
@@ -107,6 +108,7 @@ export const CreateProduct = () => {
         }, { headers: { Authorization: token }})
       }
 
+      setCallback(!callback)
       setImages(false)
       setProduct(initialState)
       history.push('/')

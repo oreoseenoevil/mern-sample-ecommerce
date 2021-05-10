@@ -63,7 +63,7 @@ const productsController = {
   },
   createProduct: async (req, res) => {
     try {
-      const { product_id, images } = req.body
+      const {product_id, title, price, description, content, images, category} = req.body
       if (!images) {
         return res.status(400).json({
           success: false,
@@ -79,7 +79,11 @@ const productsController = {
         })
       }
 
-      const newProduct = await Product.create(req.body)
+      const newProduct = new Product({
+        product_id, title: title.toLowerCase(), price, description, content, images, category
+      })
+
+      await newProduct.save()
 
       return res.status(200).json({
         success: true,
@@ -109,7 +113,7 @@ const productsController = {
   },
   updateProduct: async (req, res) => {
     try {
-      const { images } = req.body
+      const { title, price, description, content, images, category } = req.body
       if (!images) {
         return res.status(400).json({
           success: false,
@@ -117,7 +121,9 @@ const productsController = {
         })
       }
 
-      const product = await Product.findByIdAndUpdate(req.params.id, req.body)
+      const product = await Product.findByIdAndUpdate(req.params.id, {
+        title: title.toLowerCase(), price, description, content, images, category
+      })
 
       if (!product) {
         return res.status(400).json({
