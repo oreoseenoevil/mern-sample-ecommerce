@@ -4,85 +4,113 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   justify-items: center;
   grid-gap: 1em;
-}
 
-.product-card {
-  max-width: 300px;
-  overflow: hidden;
-  height: 500px;
-  padding: 15px;
-	box-shadow: 0 0 1.5rem -1rem rgba(0,0,0,0.5);
-  position: relative;
-  transition: transform 300ms ease-in-out, box-shadow 300ms;
-  margin: 1rem;
-  
-  &:hover {
-    transform: translateY(-0.5rem) scale(1.0125);
-	  box-shadow: 0 0.5em 2rem -1rem rgba(0,0,0,0.5);
+  .product-card {
+    max-width: 300px;
+    overflow: hidden;
+    height: 500px;
+    padding: 15px;
+    box-shadow: 0 0 1.5rem -1rem rgba(0, 0, 0, 0.5);
+    position: relative;
+    transition: transform 300ms ease-in-out, box-shadow 300ms;
+    margin: 1rem;
+
+    &:hover {
+      transform: translateY(-0.5rem) scale(1.0125);
+      box-shadow: 0 0.5em 2rem -1rem rgba(0, 0, 0, 0.5);
+    }
+
+    input[type='checkbox'] {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+    }
+
+    img {
+      width: 100%;
+      height: 300px;
+      display: block;
+      object-fit: contain;
+      z-index: 1;
+    }
+
+    .product-box {
+      h2 {
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        text-transform: capitalize;
+        cursor: pointer;
+        color: #323232;
+      }
+
+      span {
+        color: crimson;
+      }
+
+      p {
+        width: 100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        height: 70px;
+        overflow: hidden;
+        color: #323232;
+      }
+    }
+
+    .row-btn {
+      width: 100%;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+
+      a {
+        width: 50%;
+        text-align: center;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 2px;
+        padding: 6px;
+      }
+
+      #btn-buy {
+        background: #555;
+        margin-right: 5px;
+      }
+
+      #btn-view {
+        background: teal;
+        margin-left: 6px;
+      }
+    }
   }
 }
 
-.product-card img {
-  width: 100%;
-  height: 300px;
-  display: block;
-  object-fit: contain;
-  z-index: 1;
-}
-
-.product-box h2 {
-  width: 100%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  text-transform: capitalize;
-  cursor: pointer;
-  color: #323232;
-}
-
-.product-card span {
-  color: crimson;
-}
-
-.product-box p {
-  width: 100%;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  height: 70px;
-  overflow: hidden;
-  color: #323232;
-}
-
-.row-btn {
-  width: 100%;
-  margin-top: 10px;
+.delete-all {
+  margin: 20px;
   display: flex;
-  justify-content: space-between;
-}
+  align-items: center;
+  justify-content: flex-end;
 
-.row-btn a {
-  width: 50%;
-  text-align: center;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 2px;
-  padding: 6px;
-}
+  input[type='checkbox'] {
+    height: 25px;
+    width: 25px;
+    margin: 0 15px;
+  }
 
-#btn-buy {
-  background: #555;
-  margin-right: 5px;
-}
+  span {
+    text-transform: uppercase;
+    color: rgb(3, 164, 206);
+    letter-spacing: 1.3px;
+  }
 
-#btn-view {
-  background: teal;
-  margin-left: 6px;
-}
-
-.product-card input {
-  position: absolute;
-  width: 25px;
-  height: 25px;
+  button {
+    border: 1px solid crimson;
+    padding: 10px 25px;
+    color: crimson;
+    text-transform: uppercase;
+  }
 }
