@@ -1,5 +1,6 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
+import { useHistory, useParams } from 'react-router-dom'
 import { GlobalContext } from '@Context/GlobalContext'
 import { isAdmin, Loader } from '@Components/Utils'
 import '@Components/CreateProduct/index.scss'
@@ -10,7 +11,8 @@ const initialState = {
   price: 0,
   description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, eligendi!',
   content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus modi neque voluptas adipisci expedita iure?',
-  category: ''
+  category: '',
+  _id: ''
 }
 
 export const CreateProduct = () => {
@@ -20,6 +22,29 @@ export const CreateProduct = () => {
   const [token] = state.token
   const [images, setImages] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const history = useHistory()
+  const param = useParams()
+
+  const [products] = state.productsAPI.products
+
+  const [onEdit, setOnEdit] = useState(false)
+
+  useEffect(() => {
+    if (param.id) {
+      setOnEdit(true)
+      products.forEach(product => {
+        if(product._id === param.id) {
+          setProduct(product)
+          setImages(product.images)
+        }
+      })
+    } else {
+      setOnEdit(false)
+      setProduct(initialState)
+      setImages(false)
+    }
+  }, [param.id, setProduct, products, setImages])
 
   const handleUpload = async e => {
     e.preventDefault()
@@ -69,6 +94,27 @@ export const CreateProduct = () => {
     setProduct({...product, [name]:value})
   }
 
+  const handleSumbit = async e => {
+    e.preventDefault()
+    try {
+      if (onEdit) {
+        await axios.put(`/api/product/${product._id}`, {
+          ...product, images
+        }, { headers: { Authorization: token }})
+      } else {
+        await axios.post('/api/product', {
+          ...product, images 
+        }, { headers: { Authorization: token }})
+      }
+
+      setImages(false)
+      setProduct(initialState)
+      history.push('/')
+    } catch (error) {
+      return alert(error.response.data.msg)
+    }
+  }
+
   const styleUpload = {
     display: images ? 'block' : 'none'
   }
@@ -91,7 +137,7 @@ export const CreateProduct = () => {
             </div>
         }
       </div>
-      <form>
+      <form onSubmit={handleSumbit}>
         <div className="group">
           <input
             type="text"
@@ -100,6 +146,7 @@ export const CreateProduct = () => {
             required
             value={product.product_id}
             onChange={handleChangeInput}
+            disabled={onEdit}
           />
           <span className="bar"></span>
           <label htmlFor="product_id">Product ID</label>
@@ -171,7 +218,7 @@ export const CreateProduct = () => {
           </select>
         </div>
         <div className="group">
-          <button type="submit">Create</button>
+          <button type="submit">{onEdit ? 'Update' :'Create'}</button>
         </div>
       </form>
     </div>

@@ -137,6 +137,7 @@
 
       input {
         display: block;
+        height: 3rem;
         border: none;
         border-bottom: 1px solid #999;
 
@@ -160,6 +161,7 @@
 
       input:focus ~ label,
       input:valid ~ label,
+      input:disabled ~ label,
       textarea:focus ~ label,
       textarea:valid ~ label {
         top: -15px;

@@ -18,7 +18,6 @@ export const Products = () => {
               <ProductItem
                 key={product._id}
                 product={product}
-                isAdmin={isAdmin}
               />
             )
           })
@@ -29,11 +28,11 @@ export const Products = () => {
   )
 }
 
-export const ProductItem = ({product, isAdmin}) => {
+export const ProductItem = ({product}) => {
   return (
     <div className="product-card">
       {
-        isAdmin &&
+        isAdmin() &&
         <input type="checkbox" checked={product.checked} readOnly />
       }
       <img src={product.images.url} alt=""/>
@@ -44,13 +43,12 @@ export const ProductItem = ({product, isAdmin}) => {
       </div>
       <Button
         product={product}
-        isAdmin={isAdmin}
       />
     </div>
   )
 }
 
-export const Button = ({product, isAdmin}) => {
+export const Button = ({product}) => {
   const { state } = useContext(GlobalContext)
   
   const addCart = state.userAPI.addCart
@@ -63,7 +61,7 @@ export const Button = ({product, isAdmin}) => {
             <Link id="btn-buy" to="#!" replace>
               Delete
             </Link>
-            <Link id="btn-view" to={`/edit_product/${product._id}`} replace>
+            <Link id="btn-view" to={`/product/edit/${product._id}`} replace>
               Edit
             </Link>
           </Fragment> :

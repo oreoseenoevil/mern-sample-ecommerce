@@ -65,6 +65,11 @@ export const Main = () => {
         path='/product/create'
         exact
       />
+      <AdminRoute
+        component={CreateProduct}
+        path='/product/edit/:id'
+        exact
+      />
       <Route exact={true} path='*' component={NotFound} />
     </Switch>
   )
