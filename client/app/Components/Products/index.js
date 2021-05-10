@@ -1,9 +1,10 @@
 import React, { Fragment, useContext, useState } from 'react'
 import { GlobalContext } from '@Context/GlobalContext'
 import { Link } from 'react-router-dom'
-import { Loader, isAdmin } from '@Components/Utils'
+import { isAdmin } from '@Components/Utils'
 import axios from 'axios'
 import '@Components/Products/index.scss'
+import { Filters } from '@Components/Products/Filters'
 
 export const Products = () => {
   const { state } = useContext(GlobalContext)
@@ -60,6 +61,7 @@ export const Products = () => {
 
   return (
     <Fragment>
+      <Filters />
       {
         isAdmin() &&
         <div className="delete-all">
@@ -82,7 +84,7 @@ export const Products = () => {
           })
         }
       </div>
-      {products.length === 0 && <Loader />}
+      {products.length === 0 && <h1 style={{ textAlign: 'center' }}>No Product Found</h1>}
     </Fragment>
   )
 }

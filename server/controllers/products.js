@@ -46,9 +46,7 @@ const productsController = {
   getProducts: async (req, res) => {
     try {
       const features = new APIfeatures(Product.find(), req.query)
-        .filtering()
-        .sorting()
-        .paginating()
+        .filtering().sorting().paginating()
 
       const products = await features.query
 
