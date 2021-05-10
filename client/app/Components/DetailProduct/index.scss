@@ -6,6 +6,10 @@
   padding: 50px;
   font-size: 150%;
 
+  @media (max-width: 500px) {
+    font-size: 100%;
+  }
+
   img {
     max-width: 400px;
     width: 100%;

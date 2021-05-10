@@ -5,6 +5,7 @@ import { isAdmin } from '@Components/Utils'
 import axios from 'axios'
 import '@Components/Products/index.scss'
 import { Filters } from '@Components/Products/Filters'
+import { LoadMore } from '@Components/Products/LoadMore'
 
 export const Products = () => {
   const { state } = useContext(GlobalContext)
@@ -84,6 +85,7 @@ export const Products = () => {
           })
         }
       </div>
+      <LoadMore />
       {products.length === 0 && <h1 style={{ textAlign: 'center' }}>No Product Found</h1>}
     </Fragment>
   )

@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { GlobalContext } from '@Context/GlobalContext'
@@ -11,6 +11,7 @@ import '@Layouts/Header/index.scss'
 export const Header = () => {
   const { state } = useContext(GlobalContext)
   const [cart] = state.userAPI.cart
+  const [menu, setMenu] = useState(false)
 
   const logoutUser = async () => {
     await axios.get('/user/logout')
@@ -36,9 +37,13 @@ export const Header = () => {
     )
   }
 
+  const styleMenu = {
+    left: menu ? 0 : '-100%'
+  }
+
   return (
     <div className="header">
-      <div className="menu">
+      <div className="menu" onClick={() => setMenu(!menu)}>
         <img src={Menu} alt="menu" width="30" />
       </div>
       <div className="logo">
@@ -47,7 +52,7 @@ export const Header = () => {
         </h1>
       </div>
 
-      <ul>
+      <ul style={styleMenu}>
         <li>
           <Link to={'/'} replace>{isAdmin() ? 'Products' : 'Shop'}</Link>
         </li>
@@ -55,7 +60,7 @@ export const Header = () => {
         {(isLogin() && isAdmin()) && adminRouter()}
         {isLogin() ? loggedRouter() : <li><Link to='/login' replace>Login</Link> | <Link to='/register' replace>Register</Link></li>}
 
-        <li>
+        <li onClick={() => setMenu(!menu)}>
           <img src={Close} alt="close" width="30" className="close" />
         </li>
       </ul>
