@@ -49,7 +49,13 @@ export const Products = () => {
   }
 
   const deleteAll = () => {
-    console.log('Im alive')
+    products.forEach(product => {
+      if (product.checked) {
+        if (confirm('Are you sure?')) {
+          deleteProduct(product._id, product.images.public_id)
+        }
+      }
+    })
   }
 
   return (
