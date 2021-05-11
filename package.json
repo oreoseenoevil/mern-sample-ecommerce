@@ -4,7 +4,12 @@
   "description": "MERN Boilerplate",
   "main": "server/index.js",
   "scripts": {
+    "build": "npm run build:clean && cross-env NODE_ENV=production webpack --progress",
+    "build:clean": "rimraf ./dist",
     "start": "cross-env NODE_ENV=development nodemon server",
+    "start:production": "cross-env NODE_ENV=production node server",
+    "production": "npm run build",
+    "postinstall": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -31,6 +36,7 @@
     "copy-webpack-plugin": "^8.1.1",
     "cross-env": "^7.0.3",
     "css-loader": "^5.2.4",
+    "css-minimizer-webpack-plugin": "^2.0.0",
     "cssnano": "^5.0.2",
     "dotenv-webpack": "^7.0.2",
     "eslint": "^7.25.0",
@@ -41,7 +47,6 @@
     "mini-css-extract-plugin": "^1.6.0",
     "node-sass": "^5.0.0",
     "nodemon": "^2.0.7",
-    "optimize-css-assets-webpack-plugin": "^5.0.4",
     "postcss-loader": "^5.2.0",
     "rimraf": "^3.0.2",
     "sass-loader": "^11.0.1",
@@ -56,13 +61,11 @@
     "webpack-pwa-manifest": "^4.3.0"
   },
   "dependencies": {
-    "D": "^1.0.0",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "cloudinary": "^1.25.1",
     "compression": "^1.7.4",
     "connect-history-api-fallback": "^1.6.0",
-    "connected-react-router": "^6.9.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^9.0.0",

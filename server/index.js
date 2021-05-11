@@ -45,16 +45,7 @@ if (process.env.NODE_ENV !== 'production') {
 
   app.use(
     middleware(compiler, {
-      publicPath: webpackConfig.output.publicPath,
-      // contentBase: path.resolve(__dirname, '../client/public'),
-      // stats: {
-      //   colors: true,
-      //   hash: false,
-      //   timings: true,
-      //   chunks: false,
-      //   chunkModules: false,
-      //   modules: false
-      // }
+      publicPath: webpackConfig.output.publicPath
     })
   )
 

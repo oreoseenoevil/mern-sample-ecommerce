@@ -4,7 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 const CURRENT_WORKING_DIR = process.cwd()
 const NODE_ENV = process.env.NODE_ENV
@@ -13,16 +13,12 @@ const BASE_API_URL = process.env.BASE_API_URL
 module.exports = {
   mode: 'production',
   output: {
-    path: path.join(CURRENT_WORKING_DIR, './dist'),
+    path: path.join(CURRENT_WORKING_DIR, '/dist'),
     filename: 'js/[name].[hash].js',
     publicPath: '/'
   },
   module: {
     rules: [
-      {
-        test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader']
-      },
       {
         test: /\.(scss|sass|css)$/,
         use: [
@@ -33,7 +29,9 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [require('cssnano'), require('autoprefixer')]
+              postcssOptions: {
+                plugins: () => [require('cssnano'), require('autoprefixer')]
+              }
             }
           },
           {
@@ -51,7 +49,7 @@ module.exports = {
         }
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg|ico)$/,
+        test: /\.(png|jpg|jpeg|gif|ico)$/,
         use: [
           {
             loader: 'file-loader',
@@ -64,7 +62,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
             loader: 'file-loader',
@@ -169,13 +167,15 @@ module.exports = {
         }
       ]
     }),
-    new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.css$/g,
-      cssProcessor: require('cssnano'),
-      cssProcessorPluginOptions: {
-        preset: ['default', { discardComments: { removeAll: true } }]
-      },
-      canPrint: true
+    new CssMinimizerPlugin({
+      minimizerOptions: {
+        preset: [
+          'default',
+          {
+            discardComments: { removeAll: true },
+          },
+        ],
+      }
     })
   ]
 }

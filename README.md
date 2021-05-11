@@ -7,8 +7,8 @@ A MERN Starter Boilerplate:
 ## Clone this Repo
 
 ```
-$ git clone https://github.com/oreoseenoevil/mern-boilerplate.git
-$ cd mern-boilerplate
+$ git clone https://github.com/oreoseenoevil/mern-sample-ecommerce.git
+$ cd mern-sample-ecommerce
 ```
 
 ## Setup
@@ -24,6 +24,8 @@ $ copy env.example .env
   * PORT & BASE_SERVER_URL & BASE_API_URL & BASE_CLIENT_URL
   * CLOUD_NAME & CLOUD_API_KEY & CLOUD_API_SECRET => cloudinary configuration
 ```
+
+The server-side run on http://localhost:5000/ also the client-side also run on http://localhost:5000/
 
 ## Install
 
