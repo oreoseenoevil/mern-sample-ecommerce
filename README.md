@@ -5,8 +5,10 @@
 An ecommerce store built with MERN stack and utilizes third party API.
 This ecommerce store enable 2 different flows:
 
-1. User browse the products, transations history and checkout
+1. User browse the products, transations history and cart checkout
 2. Admin manage and control entire store components.
+
+Site Demo: https://ecshop-ecommerce.herokuapp.com/
 
 ## Clone this Repo
 
