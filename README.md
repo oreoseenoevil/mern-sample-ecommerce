@@ -1,8 +1,12 @@
-# MERN Boilerplate
+# MERN Store App
 
 ## Description
 
-A MERN Starter Boilerplate:
+An ecommerce store built with MERN stack and utilizes third party API.
+This ecommerce store enable 2 different flows:
+
+1. User browse the products, transations history and checkout
+2. Admin manage and control entire store components.
 
 ## Clone this Repo
 
